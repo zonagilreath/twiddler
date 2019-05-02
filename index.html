@@ -13,21 +13,38 @@
         $banner.appendTo($('body'));
         var $button = $('<button>Load new tweets</button>');
         $button.appendTo($('body'));
-        $('button').on('click', loadStream);
+        $('button').on('click', function(){
+          loadStream();
+        });
         var $tweetStream = $('<div id="tweetStream"></div>');
         $tweetStream.appendTo($('body'));
+        let stream = streams.home;
 
-        function loadStream(){
+        function loadStream(username){
           $tweetStream.html('');
-          var index = streams.home.length - 1;
+          // if(username){
+          //   stream = streams.users[username];
+          //   $('button').off().on('click', function(){
+          //     loadStream(username);
+          //   });
+          // }else {
+          //   stream = streams.home;
+          //   $('button').off().on('click', function(){
+          //     loadStream();
+          //   });
+          // }
+          var index = stream.length - 1;
           while(index >= 0){
-            var tweet = streams.home[index];
+            var tweet = stream[index];
             var $tweet = $('<div class="tweet"></div>');
             var $handle = $(`<h3 class="handle">@${tweet.user}</h3>`);
+            // $handle.on('click', function(event){
+            //   let tweetUser = event.target.textContent.slice(1);
+            //   loadStream(tweetUser);
+            // })
             var $tweetBody = $(`<p class="tweetBody">${tweet.message}</p>`);
             var $tweetDate = $(`<p class="tweetDate">${tweet.created_at}</p>`);
             $tweet.append($handle, $tweetBody, $tweetDate);
-            // $tweet.text(`@${tweet.user}: ${tweet.message} at ${tweet.created_at}`);
             $tweet.appendTo($tweetStream);
             index -= 1;
           }
@@ -39,5 +56,5 @@
   </body>
 </html>
 <!-- 
-  separate elements for username, tweet, and date created (h1, p, p)
+  we need a home button to go back from user stream
  -->
