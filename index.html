@@ -9,6 +9,8 @@
     <script>
 
       $(document).ready(function(){
+        var $banner = $('<div class="banner">#twiddler</div>');
+        $banner.appendTo($('body'));
         var $button = $('<button>Load new tweets</button>');
         $button.appendTo($('body'));
         $('button').on('click', loadStream);
@@ -20,8 +22,8 @@
           var index = streams.home.length - 1;
           while(index >= 0){
             var tweet = streams.home[index];
-            var $tweet = $('<div></div>');
-            var $handle = $(`<h3>@${tweet.user}</h3>`);
+            var $tweet = $('<div class="tweet"></div>');
+            var $handle = $(`<h3 class="handle">@${tweet.user}</h3>`);
             var $tweetBody = $(`<p class="tweetBody">${tweet.message}</p>`);
             var $tweetDate = $(`<p class="tweetDate">${tweet.created_at}</p>`);
             $tweet.append($handle, $tweetBody, $tweetDate);

@@ -1,0 +1,53 @@
+body {
+	background-color: #AEA4BF;
+	color: #3B252C;
+	font-family: sans-serif;
+	text-align: center;
+}
+
+.banner {
+	display: inline-block;
+	height: 100px;
+	font-size: 5em;
+	color: #665388;
+	font-family: Comic Sans MS;
+}
+
+button {
+	background-color: #D5D0DD;
+	width: 65%;
+	margin: 0 auto;
+	border: 1px solid #AEA4BF;
+	padding: 15px 45px;
+	text-transform: uppercase;
+	font-weight: bold;
+	opacity: 0.8;
+	color: #665388;
+}
+
+#tweetStream {
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+	background-color: #D5D0DD;
+	width: 65%;
+	margin: 0 auto;
+}
+
+.tweet {
+	border: 1px solid #AEA4BF;
+	padding: 15px 45px;
+}
+
+.handle {
+
+}
+
+.tweetBody {
+
+}
+
+.tweetDate {
+	font-size: 70%;
+	opacity: 0.8;
+}
