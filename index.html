@@ -3,49 +3,50 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-    <script>
+    <div class="banner">#twiddler</div>
+    <div class="nav">
+      <button class="homeButton"><ion-icon name="home"></ion-icon></button>
+      <button class="load">Load new tweets</button>
+    </div>
+    <div id="tweetStream"></div>
 
+    <script>
       $(document).ready(function(){
-        var $banner = $('<div class="banner">#twiddler</div>');
-        $banner.appendTo($('body'));
-        var $button = $('<button>Load new tweets</button>');
-        $button.appendTo($('body'));
         $('button').on('click', function(){
           loadStream();
         });
-        var $tweetStream = $('<div id="tweetStream"></div>');
-        $tweetStream.appendTo($('body'));
-        let stream = streams.home;
+        let stream = streams.home; // array of all tweets
 
         function loadStream(username){
-          $tweetStream.html('');
-          // if(username){
-          //   stream = streams.users[username];
-          //   $('button').off().on('click', function(){
-          //     loadStream(username);
-          //   });
-          // }else {
-          //   stream = streams.home;
-          //   $('button').off().on('click', function(){
-          //     loadStream();
-          //   });
-          // }
+          $("#tweetStream").html('');
+          if(username){
+            stream = streams.users[username]; //streams.users = {};
+            $('.load').off().on('click', function(){
+              loadStream(username);
+            });
+          }else {
+            stream = streams.home;
+            $('.load').off().on('click', function(){
+              loadStream();
+            });
+          }
           var index = stream.length - 1;
           while(index >= 0){
             var tweet = stream[index];
             var $tweet = $('<div class="tweet"></div>');
             var $handle = $(`<h3 class="handle">@${tweet.user}</h3>`);
-            // $handle.on('click', function(event){
-            //   let tweetUser = event.target.textContent.slice(1);
-            //   loadStream(tweetUser);
-            // })
+            $handle.on('click', function(event){
+              let tweetUser = this.textContent.slice(1);
+              loadStream(tweetUser);
+            })
             var $tweetBody = $(`<p class="tweetBody">${tweet.message}</p>`);
             var $tweetDate = $(`<p class="tweetDate">${tweet.created_at}</p>`);
             $tweet.append($handle, $tweetBody, $tweetDate);
-            $tweet.appendTo($tweetStream);
+            $tweet.appendTo("#tweetStream");
             index -= 1;
           }
         }

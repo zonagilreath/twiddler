@@ -6,23 +6,43 @@ body {
 }
 
 .banner {
-	display: inline-block;
+	display: block;
 	height: 100px;
 	font-size: 5em;
 	color: #665388;
 	font-family: Comic Sans MS;
 }
 
-button {
-	background-color: #D5D0DD;
+.nav {
 	width: 65%;
 	margin: 0 auto;
+	display: flex;
+	justify-content: flex-start;
+}
+
+
+button {
+	background-color: #D5D0DD;
+	
 	border: 1px solid #AEA4BF;
 	padding: 15px 45px;
 	text-transform: uppercase;
 	font-weight: bold;
 	opacity: 0.8;
 	color: #665388;
+}
+
+.homeButton{
+	padding: 5px 10px;
+}
+
+ion-icon {
+	font-size: 200%;
+}
+
+.load{
+	width: 100%;
+	
 }
 
 #tweetStream {
