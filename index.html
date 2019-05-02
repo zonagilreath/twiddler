@@ -3,25 +3,39 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
     <script>
 
       $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
+        var $button = $('<button>Load new tweets</button>');
+        $button.appendTo($('body'));
+        $('button').on('click', loadStream);
+        var $tweetStream = $('<div id="tweetStream"></div>');
+        $tweetStream.appendTo($('body'));
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
+        function loadStream(){
+          $tweetStream.html('');
+          var index = streams.home.length - 1;
+          while(index >= 0){
+            var tweet = streams.home[index];
+            var $tweet = $('<div></div>');
+            var $handle = $(`<h3>@${tweet.user}</h3>`);
+            var $tweetBody = $(`<p class="tweetBody">${tweet.message}</p>`);
+            var $tweetDate = $(`<p class="tweetDate">${tweet.created_at}</p>`);
+            $tweet.append($handle, $tweetBody, $tweetDate);
+            // $tweet.text(`@${tweet.user}: ${tweet.message} at ${tweet.created_at}`);
+            $tweet.appendTo($tweetStream);
+            index -= 1;
+          }
         }
-
+        loadStream();
       });
 
     </script>
   </body>
 </html>
+<!-- 
+  separate elements for username, tweet, and date created (h1, p, p)
+ -->
