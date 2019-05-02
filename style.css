@@ -14,7 +14,8 @@ body {
 }
 
 .nav {
-	width: 65%;
+	width: 75%;
+	max-width: 650px;
 	margin: 0 auto;
 	display: flex;
 	justify-content: flex-start;
@@ -23,7 +24,6 @@ body {
 
 button {
 	background-color: #D5D0DD;
-	
 	border: 1px solid #AEA4BF;
 	padding: 15px 45px;
 	text-transform: uppercase;
@@ -42,7 +42,6 @@ ion-icon {
 
 .load{
 	width: 100%;
-	
 }
 
 #tweetStream {
@@ -50,21 +49,14 @@ ion-icon {
 	display: flex;
 	flex-direction: column;
 	background-color: #D5D0DD;
-	width: 65%;
+	width: 75%;
+	max-width: 650px;
 	margin: 0 auto;
 }
 
 .tweet {
 	border: 1px solid #AEA4BF;
 	padding: 15px 45px;
-}
-
-.handle {
-
-}
-
-.tweetBody {
-
 }
 
 .tweetDate {
