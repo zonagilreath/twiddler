@@ -29,6 +29,15 @@ body {
 /*	height: 75px;*/
 }
 
+button {
+	background-color: #D5D0DD;
+	border: 1px solid #AEA4BF;
+	padding: 15px 45px;
+	text-transform: uppercase;
+	font-weight: bold;
+	opacity: 0.8;
+	color: #665388;
+}
 .post-tweet {
 	padding: 15px 20px;
 	width: 25%;
@@ -39,15 +48,6 @@ body {
 	resize: none;
 }
 
-button {
-	background-color: #D5D0DD;
-	border: 1px solid #AEA4BF;
-	padding: 15px 45px;
-	text-transform: uppercase;
-	font-weight: bold;
-	opacity: 0.8;
-	color: #665388;
-}
 
 .homeButton{
 	padding: 5px 10px;
