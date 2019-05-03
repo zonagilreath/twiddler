@@ -21,6 +21,23 @@ body {
 	justify-content: flex-start;
 }
 
+.new-tweet-area{
+	display: flex;
+	width: 75%;
+	max-width: 650px;
+	margin: 0 auto;
+/*	height: 75px;*/
+}
+
+.post-tweet {
+	padding: 15px 20px;
+	width: 25%;
+}
+
+.textbox {
+	width: 75%;
+	resize: none;
+}
 
 button {
 	background-color: #D5D0DD;
@@ -56,7 +73,7 @@ ion-icon {
 
 .tweet {
 	border: 1px solid #AEA4BF;
-	padding: 15px 45px;
+	padding: 5px 45px;
 }
 
 .tweetDate {

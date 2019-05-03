@@ -4,6 +4,7 @@
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
     <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
@@ -12,39 +13,55 @@
       <button class="homeButton"><ion-icon name="home"></ion-icon></button>
       <button class="load">Load new tweets</button>
     </div>
+    <div class="new-tweet-area">
+      <textarea class="textbox" rows="4"></textarea>
+      <button class="post-tweet">Post tweet</button>
+    </div>
     <div id="tweetStream"></div>
 
     <script>
       $(document).ready(function(){
-        $('button').on('click', function(){
+        window.visitor = 'HR_Visitor';
+        streams.users[visitor] = [];
+        $('.load').on('click', function(){
           loadStream();
         });
-        let stream = streams.home; // array of all tweets
+        $('.homeButton').on('click', function() {
+          loadStream();
+        })
+        $('.post-tweet').on('click', function(){
+          let message = $('.textbox').val().replace(/\n/g, '<br/>');
+          writeTweet(message);
+          $('.textbox').val('');
+          loadStream();
+        })
 
         function loadStream(username){
           $("#tweetStream").html('');
           if(username){
-            stream = streams.users[username]; //streams.users = {};
+            var tweetArray = streams.users[username]; //streams.users[username] = [array of users tweets] 
             $('.load').off().on('click', function(){
               loadStream(username);
             });
+            $('.load').text(`Load ${username}'s tweets`);
           }else {
-            stream = streams.home;
+            var tweetArray = streams.home;
             $('.load').off().on('click', function(){
               loadStream();
             });
+            $('.load').text(`Load new tweets`);
           }
-          var index = stream.length - 1;
+          var index = tweetArray.length - 1;
           while(index >= 0){
-            var tweet = stream[index];
+            var tweet = tweetArray[index]; // tweet = {user: mracus, message: whatever, created_at: 10/22}
             var $tweet = $('<div class="tweet"></div>');
             var $handle = $(`<h3 class="handle">@${tweet.user}</h3>`);
             $handle.on('click', function(event){
-              let tweetUser = this.textContent.slice(1);
+              let tweetUser = $(this).text().slice(1); 
               loadStream(tweetUser);
-            })
+            });
             var $tweetBody = $(`<p class="tweetBody">${tweet.message}</p>`);
-            var $tweetDate = $(`<p class="tweetDate">${tweet.created_at}</p>`);
+            var $tweetDate = $(`<p class="tweetDate">${moment(tweet.created_at).fromNow()}</p>`);
             $tweet.append($handle, $tweetBody, $tweetDate);
             $tweet.appendTo("#tweetStream");
             index -= 1;
@@ -52,7 +69,6 @@
         }
         loadStream();
       });
-
     </script>
   </body>
 </html>
