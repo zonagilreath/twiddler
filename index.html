@@ -9,67 +9,27 @@
   </head>
   <body>
     <div class="banner">#twiddler</div>
-    <div class="nav">
-      <button class="homeButton"><ion-icon name="home"></ion-icon></button>
-      <button class="load">Load new tweets</button>
+    <div class="container">
+      <div id="user-profile">
+        <img src="img/HR_Visitor.png" class="big-avi">
+        <div class="user-info">
+          <h2 class="user-handle">@HR_Visitor</h1>
+          <p class="user-bio">I'm a nondescript user!</p>
+        </div>
+      </div>
+      <div id="main-column">
+        <div class="nav">
+          <button class="homeButton"><ion-icon name="home"></ion-icon></button>
+          <button class="load">Load new tweets</button>
+        </div>
+        <div class="new-tweet-area">
+          <textarea class="textbox" rows="4"></textarea>
+          <button class="post-tweet">Post tweet</button>
+        </div>
+        <div id="tweetStream"></div>
+      </div>
     </div>
-    <div class="new-tweet-area">
-      <textarea class="textbox" rows="4"></textarea>
-      <button class="post-tweet">Post tweet</button>
-    </div>
-    <div id="tweetStream"></div>
-
-    <script>
-      $(document).ready(function(){
-        window.visitor = 'HR_Visitor';
-        streams.users[visitor] = [];
-        $('.load').on('click', function(){
-          loadStream();
-        });
-        $('.homeButton').on('click', function() {
-          loadStream();
-        })
-        $('.post-tweet').on('click', function(){
-          let message = $('.textbox').val().replace(/\n/g, '<br/>');
-          writeTweet(message);
-          $('.textbox').val('');
-          loadStream();
-        })
-
-        function loadStream(username){
-          $("#tweetStream").html('');
-          if(username){
-            var tweetArray = streams.users[username]; //streams.users[username] = [array of users tweets] 
-            $('.load').off().on('click', function(){
-              loadStream(username);
-            });
-            $('.load').text(`Load ${username}'s tweets`);
-          }else {
-            var tweetArray = streams.home;
-            $('.load').off().on('click', function(){
-              loadStream();
-            });
-            $('.load').text(`Load new tweets`);
-          }
-          var index = tweetArray.length - 1;
-          while(index >= 0){
-            var tweet = tweetArray[index]; // tweet = {user: mracus, message: whatever, created_at: 10/22}
-            var $tweet = $('<div class="tweet"></div>');
-            var $handle = $(`<h3 class="handle">@${tweet.user}</h3>`);
-            $handle.on('click', function(event){
-              let tweetUser = $(this).text().slice(1); 
-              loadStream(tweetUser);
-            });
-            var $tweetBody = $(`<p class="tweetBody">${tweet.message}</p>`);
-            var $tweetDate = $(`<p class="tweetDate">${moment(tweet.created_at).fromNow()}</p>`);
-            $tweet.append($handle, $tweetBody, $tweetDate);
-            $tweet.appendTo("#tweetStream");
-            index -= 1;
-          }
-        }
-        loadStream();
-      });
-    </script>
+    <script src="app.js"></script>
   </body>
 </html>
 <!-- 
