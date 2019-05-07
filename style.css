@@ -26,6 +26,11 @@ body {
 	max-width: 200px;
 	border: 1px solid #AEA4BF;
 	margin-right: 2%;
+	position: fixed;
+	/*top: -45px;*/
+	left: 50%;
+  top: 10%;
+  transform: translate(-285%, 0%);
 }
 
 .big-avi {
@@ -34,7 +39,6 @@ body {
 	width: 100%;
 	height: auto;
 	margin: 0 auto;
-	/*z-index: 10;*/
 }
 
 .user-info{
@@ -132,4 +136,8 @@ ion-icon {
 .tweetDate {
 	font-size: 70%;
 	opacity: 0.8;
+}
+
+.handle:hover {
+	cursor: pointer;
 }

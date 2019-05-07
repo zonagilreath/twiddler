@@ -48,5 +48,8 @@ $(document).ready(function(){
       index -= 1;
     }
   }
+  $('.user-handle').on('click', function(event){
+    loadStream(window.visitor);
+  })
   loadStream();
 });
